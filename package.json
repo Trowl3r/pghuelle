@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "tsc && nodemon lib/src/index.js",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "tslint -p tsconfig.json"
   },
   "repository": {
@@ -20,9 +21,13 @@
   },
   "homepage": "https://github.com/Trowl3r/pghuelle#readme",
   "devDependencies": {
+    "nodemon": "^2.0.20",
     "prettier": "^2.8.3",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "pg": "^8.8.0"
   }
 }
