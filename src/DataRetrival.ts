@@ -1,33 +1,42 @@
-class DataRetrivalClass {
-    q: string;
+import { Pool } from 'pg';
 
-    constructor(q: string) {
-        this.q = q;
-    }
+export default class DataRetrivalClass {
+  q: string;
+  pool: Pool;
 
-    from(table: string, ...args: string[]) {
-        this.q += `FROM ${table}`;
+  constructor(q: string, pool: Pool) {
+    this.q = q;
+    this.pool = pool;
+  }
 
-        args.forEach(property => {
-            this.q += `, ${property} `;
-        });
+  from(table: string, ...args: string[]): DataRetrivalClass {
+    // TODO: THINK ABOUT MAKING IT NOT DRY WITH SELECT
+    this.q += `FROM ${table}${args.length > 0 ? '' : ' '}`; // TODO: FIX THIS UGLY FORMAT
 
-        return this;
-    }
-
-    getQuery() {
-        return this.q;
-    }
-
-    // TODO: Create Execute function to execute the query  
-}
-
-export default function selectr(f: string = "*", ...args: string[]): DataRetrivalClass {
-    let q = `SELECT ${f}${args.length > 0 ? "" : " "}`; // TODO: FIX THIS UGLY FORMAT
-
-    args.forEach(property => {
-        q += `, ${property} `;
+    args.forEach((property) => {
+      this.q += `, ${property} `;
     });
 
-    return new DataRetrivalClass(q);
+    return this;
+  }
+
+  desc(p: string = "id"): DataRetrivalClass {
+    this.q += `ORDER BY ${p} DESC`;
+
+    return this;
+  }
+
+  asc(p: string = "id"): DataRetrivalClass {
+    this.q += `ORDER BY ${p} ASC`;
+
+    return this;
+  }
+
+  getQuery(): string {
+    return this.q;
+  }
+
+  execute() {
+    return this.pool.query(this.q);
+  }
 }

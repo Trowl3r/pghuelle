@@ -1,9 +1,3 @@
-import selectr from "./DataRetrival";
+import PGHuelle from "./PGHuelle";
 
-// TODO: FIX THE IMPORTS
-
-export default {
-    select: selectr
-}
-
-export const select = selectr;
+export default PGHuelle;

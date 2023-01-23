@@ -5,3 +5,4 @@ CREATE TABLE Person(
 );
 
 INSERT INTO Person VALUES(1, 'Test Name', 21);
+insert into person values(2, 'Test2', 30);
