@@ -22,6 +22,15 @@ const db = new PGHuelle(config);
   .then((res) => console.log(res.rows))
   .catch((err) => console.error(err));  */
 
-db.select().from("person").desc("name").execute()
+/* db.select()
+  .from('person')
+  .asc('name')
+  .execute()
   .then((res) => console.log(res.rows))
-  .catch((err) => console.error(err));  
+  .catch((err) => console.error(err));
+
+db.delete()
+  .from('person')
+  .execute()
+  .then((res) => console.log('Deleted Table'))
+  .catch((err) => console.error(err)); */

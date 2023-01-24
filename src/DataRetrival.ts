@@ -1,21 +1,14 @@
 import { Pool } from 'pg';
+import DataBase from './DataBase';
+import { generateFrom } from './helpers';
 
-export default class DataRetrivalClass {
-  q: string;
-  pool: Pool;
-
+export default class DataRetrivalClass extends DataBase {
   constructor(q: string, pool: Pool) {
-    this.q = q;
-    this.pool = pool;
+    super(q, pool);
   }
 
   from(table: string, ...args: string[]): DataRetrivalClass {
-    // TODO: THINK ABOUT MAKING IT NOT DRY WITH SELECT
-    this.q += `FROM ${table}${args.length > 0 ? '' : ' '}`; // TODO: FIX THIS UGLY FORMAT
-
-    args.forEach((property) => {
-      this.q += `, ${property} `;
-    });
+    this.q = generateFrom(this.q, table, ...args);
 
     return this;
   }
@@ -30,13 +23,5 @@ export default class DataRetrivalClass {
     this.q += `ORDER BY ${p} ASC`;
 
     return this;
-  }
-
-  getQuery(): string {
-    return this.q;
-  }
-
-  execute() {
-    return this.pool.query(this.q);
   }
 }

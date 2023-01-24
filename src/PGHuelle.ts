@@ -1,5 +1,6 @@
 import { Pool, PoolConfig } from 'pg';
 import DataRetrivalClass from './DataRetrival';
+import DataManipulationClass from './DataManipulation';
 
 export default class PGHuelle{
   pool: Pool;
@@ -16,5 +17,11 @@ export default class PGHuelle{
     });
 
     return new DataRetrivalClass(q, this.pool);
+  }
+
+  delete(): DataManipulationClass {
+    let q = "DELETE ";
+
+    return new DataManipulationClass(q, this.pool);
   }
 }
