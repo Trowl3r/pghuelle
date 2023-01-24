@@ -10,6 +10,7 @@ export default abstract class DataBase {
   }
 
   abstract from(table: string, ...args: string[]): DataBase;
+  abstract where(props: { [key: string]: string | number }): DataBase;
 
   getQuery(): string {
     return this.q;

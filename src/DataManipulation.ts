@@ -1,6 +1,6 @@
 import { Pool } from 'pg';
 import DataBase from './DataBase';
-import { generateFrom } from './helpers';
+import { equal, generateFrom } from './helpers';
 
 export default class DataManipulationClass extends DataBase {
   constructor(q: string, pool: Pool) {
@@ -8,7 +8,7 @@ export default class DataManipulationClass extends DataBase {
   }
 
   from(table: string): DataManipulationClass {
-    this.q = generateFrom(this.q, table, ...[]);
+    this.q += generateFrom(table, ...[]);
 
     return this;
   }
@@ -33,26 +33,13 @@ export default class DataManipulationClass extends DataBase {
   }
 
   set(props: { [key: string]: string | number }): DataManipulationClass {
-    this.q += 'SET ';
+    this.q += `SET ${equal(props, 'SET')}`;
 
-    // This is a really ugly way but since I want to have a prototype,
-    // this is ok for the start
-    // TODO: Make this more beautiful
-    let c = Object.keys(props).length;
-    let i = 1;
-    for (const k in props) {
-      const v = props[k];
+    return this;
+  }
 
-      if (isNaN(Number(v))) {
-        if (i === c) this.q += `${k}='${v}'`;
-        else this.q += `${k}='${v}', `;
-      } else {
-        if (i === c) this.q += `${k}=${v}`;
-        else this.q += `${k}=${v}, `;
-      }
-
-      i++;
-    }
+  where(props: { [key: string]: string | number }): DataManipulationClass {
+    this.q += ` WHERE ${equal(props, "WHERE")}`;
 
     return this;
   }
