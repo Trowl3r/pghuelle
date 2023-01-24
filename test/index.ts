@@ -34,3 +34,15 @@ db.delete()
   .execute()
   .then((res) => console.log('Deleted Table'))
   .catch((err) => console.error(err)); */
+
+/* db.insert('person')
+  .values('1', 'Test', '23')
+  .execute()
+  .then((res) => console.log('Created Values'))
+  .catch((err) => console.error(err)); */
+
+db.update('person')
+  .set({ id: 1, name: 'Torben', age: 26 })
+  .execute()
+  .then((res) => console.log('Updated Values'))
+  .catch((err) => console.error(err));
