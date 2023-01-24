@@ -37,7 +37,6 @@ const db = new PGHuelle(config);
   .then((res) => console.log('Deleted Table'))
   .catch((err) => console.error(err));  */
 
-
 /* db.insert('person')
   .values('2', 'Test', '23')
   .execute()

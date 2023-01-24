@@ -9,6 +9,10 @@ export default class PGHuelle {
     this.pool = new Pool(config);
   }
 
+  rawQuery(f: string) {
+    return this.pool.query(f);
+  }
+
   // Data Retrival
   select(f: string = '*', ...args: string[]): DataRetrivalClass {
     let q = `SELECT ${f}${args.length > 0 ? '' : ' '}`; // TODO: FIX THIS UGLY FORMAT
