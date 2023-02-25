@@ -1,6 +1,6 @@
 import { Pool } from 'pg';
 import DataBase from './DataBase';
-import { equal, generateFrom } from './helpers';
+import { equal, generateFrom } from '../functions/helpers';
 
 export default class DataManipulationClass extends DataBase {
   constructor(q: string, pool: Pool) {
@@ -39,7 +39,7 @@ export default class DataManipulationClass extends DataBase {
   }
 
   where(props: { [key: string]: string | number }): DataManipulationClass {
-    this.q += ` WHERE ${equal(props, "WHERE")}`;
+    this.q += `WHERE ${equal(props, "WHERE")}`;
 
     return this;
   }

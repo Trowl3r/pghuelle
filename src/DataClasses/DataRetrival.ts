@@ -1,6 +1,6 @@
 import { Pool } from 'pg';
-import DataBase from './DataBase';
-import { equal, generateFrom } from './helpers';
+import DataBase from '../DataClasses/DataBase';
+import { equal, generateFrom } from '../functions/helpers';
 
 export default class DataRetrivalClass extends DataBase {
   constructor(q: string, pool: Pool) {
@@ -11,6 +11,11 @@ export default class DataRetrivalClass extends DataBase {
     this.q += generateFrom(table, ...args);
 
     return this;
+  }
+
+  namedFrom(tables: {[key: string]: string}) {
+    this.q += `FROM `;
+    
   }
 
   desc(p: string = "id"): DataRetrivalClass {
@@ -26,7 +31,7 @@ export default class DataRetrivalClass extends DataBase {
   }
 
   where(props: { [key: string]: string | number; }): DataRetrivalClass {
-    this.q += ` WHERE ${equal(props, "WHERE")}`;
+    this.q += `WHERE ${equal(props, "WHERE")}`;
     
     return this;
   }

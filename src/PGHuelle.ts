@@ -1,6 +1,6 @@
 import { Pool, PoolConfig } from 'pg';
-import DataRetrivalClass from './DataRetrival';
-import DataManipulationClass from './DataManipulation';
+import DataRetrivalClass from './DataClasses/DataRetrival';
+import DataManipulationClass from './DataClasses/DataManipulation';
 
 export default class PGHuelle {
   pool: Pool;

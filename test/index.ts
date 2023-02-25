@@ -1,4 +1,5 @@
 import PGHuelle from '../src';
+import { count } from '../src/functions/functions';
 
 const config = {
   user: 'postgres',
@@ -13,22 +14,18 @@ const db = new PGHuelle(config);
 /* db.select()
   .from('person')
   .execute()
-  .then((res) => console.log(res.rows))
-  .catch((err) => console.error(err)); */
+  .then((res: { rows: any; }) => console.log(res.rows))
+  .catch((err: any) => console.error(err)); */
 
-/* new PGHuelle(config).select()
-  .from('person')
-  .execute()
-  .then((res) => console.log(res.rows))
-  .catch((err) => console.error(err));  */
+// console.log(db.select(count('*')).from('person').getQuery());
 
-/* db.select()
+db.select()
   .from('person')
   .where({ id: 1 })
   .asc('name')
   .execute()
   .then((res) => console.log(res.rows))
-  .catch((err) => console.error(err)); */
+  .catch((err) => console.error(err));
 
 /* db.delete()
   .from('person')
@@ -38,12 +35,13 @@ const db = new PGHuelle(config);
   .catch((err) => console.error(err));  */
 
 /* db.insert('person')
-  .values('2', 'Test', '23')
+  .values('3', 'Torben', '21')
   .execute()
   .then((res) => console.log('Created Values'))
   .catch((err) => console.error(err)); */
 
-/* db.update('person').set({ id: 1, name: 'Torben', age: 27 })
+/* db.update('person')
+  .set({ id: 1, name: 'Torben', age: 27 })
   .execute()
   .then((res) => console.log('Updated Values'))
-  .catch((err) => console.error(err));  */
+  .catch((err) => console.error(err)); */

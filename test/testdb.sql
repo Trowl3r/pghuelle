@@ -1,3 +1,5 @@
+DROP TABLE Person;
+
 CREATE TABLE Person(
    ID INT PRIMARY KEY     NOT NULL,
    NAME           TEXT    NOT NULL,
