@@ -1,3 +1,8 @@
+/**
+ * This file returns most common SQL Functions
+ * @param q 
+ * @returns string
+ */
 export function count(q: string): string {
     return `COUNT(${q})`;
 }

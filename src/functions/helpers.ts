@@ -1,3 +1,9 @@
+/**
+ * Generates the from clause, from what tables it needs to be triggered.
+ * @param table 
+ * @param args 
+ * @returns string
+ */
 export function generateFrom(table: string, ...args: string[]): string {
   let q = `FROM ${table}${args.length > 0 ? '' : ' '}`; // TODO: FIX THIS UGLY FORMAT
 
@@ -8,6 +14,12 @@ export function generateFrom(table: string, ...args: string[]): string {
   return q;
 }
 
+/**
+ * TODO  
+ * @param props 
+ * @param f 
+ * @returns string
+ */
 export function equal(props: { [key: string]: string | number }, f: 'WHERE' | 'SET'): string {
   let q = '';
 
