@@ -18,12 +18,13 @@ export default abstract class DataBase {
   }
 
   /**
-   *  Abstract methods, that will be available in all Classes 
+   * Abstract methods, that will be available in all Classes 
+   * WILL BE COMMENTED OUT FOR NOW, BC OF DDC
    * @param table 
    * @param args 
    */
-  abstract from(table: string, ...args: string[]): DataBase;
-  abstract where(props: { [key: string]: string | number }): DataBase;
+  // abstract from(table: string, ...args: string[]): DataBase;
+  // abstract where(props: { [key: string]: string | number }): DataBase;
 
   /**
    * gets the current generated query 
