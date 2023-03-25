@@ -114,7 +114,23 @@ const company: CreateTableProps = {
   .then((res) => console.log('Table Inserted'))
   .catch((err) => console.log(err)); */
 
-db.insert('Company').values('1', '2', '1','Test')
+/* db.insert('Company').values('1', '2', '1','Test')
   .execute()
   .then((res) => console.log("Inserted"))
-  .catch((err) => console.log(err)); 
+  .catch((err) => console.log(err));  */
+
+console.log(
+
+db.select()
+  .from('person')
+  .join('company')
+  .on({ company: 'person' }, { person: 'id' }).getQuery()
+)
+
+db.select()
+  .from('person')
+  .join('company')
+  .on({ company: 'person' }, { person: 'id' })
+  .execute()
+  .then((res) => console.log(res.rows))
+  .catch((err) => console.log(err));

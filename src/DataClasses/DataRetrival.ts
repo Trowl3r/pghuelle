@@ -57,4 +57,20 @@ export default class DataRetrivalClass extends DataBase {
     
     return this;
   }
+
+  /**
+   * JOIN Statement to join
+   */
+  join(table: string): DataRetrivalClass {
+    this.q += `JOIN ${table} `;
+    return this;
+  }
+
+  on(table1: {[key: string]: string}, table2: {[key: string]: string}): DataRetrivalClass {
+    const t1 = Object.keys(table1)[0]; 
+    const t2 = Object.keys(table2)[0]; 
+    
+    this.q += `ON ${t1}.${table1[t1]} = ${t2}.${table2[t2]} `;
+    return this;
+  }
 }
