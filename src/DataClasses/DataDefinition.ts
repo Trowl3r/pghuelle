@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 import DataBase from './DataBase';
 import { foreignKeyConstraint, notNull, primaryKey, size } from '../functions/constraints';
-import { DataType, Constraints, CreateTableProps, foreignKey } from '../interfaces/TableDefinition';
+import { DataType, Constraints, CreateTableProps, foreignKey, dropConstraints } from '../interfaces/TableDefinition';
 
 /**
  * Data Definition class, that does everything needed for structure data
@@ -39,25 +39,41 @@ export default class DataDefinitionClass extends DataBase {
     const columnNames = Object.keys(columns);
     let i = 0; // TODO: Change this
     let fks: foreignKey[] = [];
+
     columnNames.forEach((name) => {
       const options: Constraints = columns[name];
       this.q += `\t${name}`;
       this.generateColumn(options);
-      if (options.foreignKey) fks.push(options.foreignKey);
-      if (i < columnNames.length - 1 || fks.length > 0) this.q += ',\n';
+      if (options.foreignKey) fks.push(options.foreignKey); // Add fk if exists on row
+      if (i < columnNames.length - 1 || fks.length > 0) this.q += ',\n'; // check if this is the last line
       i++;
     });
-    this.q += '\n';
 
     i = 0;
+    // Add all fks add the end
     fks.forEach((fk) => {
       this.q += '\n' + foreignKeyConstraint(fk);
-      if(i < fks.length - 1) this.q += ",";
-      else "\n"
+      // Check if this is the last foreign key
+      if (i < fks.length - 1) this.q += ',';
+      else '\n';
       i++;
     });
 
     this.q += '\n);';
+    return this;
+  }
+
+  /**
+   * 
+   * Drops the given table with given constaraint
+   * @param table 
+   * @param constraint 
+   * @param ie 
+   * @returns 
+   */
+  dropTable(table: string, constraint: dropConstraints = 'CASCADE', ie = false): DataDefinitionClass {
+    this.q += `DROP TABLE ${ie ? 'IF EXISTS ' : ''}${table} ${constraint}`;
+
     return this;
   }
 }

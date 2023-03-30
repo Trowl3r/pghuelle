@@ -8,7 +8,8 @@
     "start": "tsc && node lib/src/index.js",
     "test": "tsc && node lib/test/index.js",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "install": "tsc && node lib/test/installation.js"
   },
   "repository": {
     "type": "git",

@@ -1,10 +1,31 @@
-DROP TABLE Person;
+DROP TABLE IF EXISTS Person CASCADE;
+DROP TABLE IF EXISTS Manager CASCADE;
+DROP TABLE IF EXISTS Company CASCADE;
 
-CREATE TABLE Person(
-   ID INT PRIMARY KEY     NOT NULL,
-   NAME           TEXT    NOT NULL,
-   AGE            INT     NOT NULL
+CREATE TABLE Person (
+	id INT PRIMARY KEY NOT NULL,
+	name TEXT NOT NULL,
+	age INT NOT NULL
 );
 
-INSERT INTO Person VALUES(1, 'Test Name', 21);
-insert into person values(2, 'Test2', 30);
+CREATE TABLE Manager (
+	id INT PRIMARY KEY,
+	name VARCHAR(50)
+);
+
+CREATE TABLE Company (
+	id INT PRIMARY KEY,
+	person INT NOT NULL,
+	manager INT NOT NULL,
+	name VARCHAR(50),
+
+	FOREIGN KEY(person) REFERENCES Person(id) ON DELETE CASCADE,
+	FOREIGN KEY(manager) REFERENCES Manager(id) ON DELETE RESTRICT
+);
+
+INSERT INTO person VALUES (1, 'Test person', 21);
+INSERT INTO person VALUES (2, 'Test2', 30);
+INSERT INTO Manager VALUES (1, 'Manager 1');
+INSERT INTO Manager VALUES (2, 'Manager 2');
+INSERT INTO Company VALUES (1, 2, 1, 'Company 1');
+INSERT INTO Company VALUES (2, 1, 2, 'Company 2');

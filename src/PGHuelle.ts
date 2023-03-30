@@ -2,7 +2,7 @@ import { Pool, PoolConfig } from 'pg';
 import DataRetrivalClass from './DataClasses/DataRetrival';
 import DataManipulationClass from './DataClasses/DataManipulation';
 import DataDefinitionClass from './DataClasses/DataDefinition';
-import { CreateTableProps } from './interfaces/TableDefinition';
+import { CreateTableProps, dropConstraints } from './interfaces/TableDefinition';
 
 /**
  * This class will be the base of the library.
@@ -81,5 +81,9 @@ export default class PGHuelle {
   // Data Definition
   createTable(props: CreateTableProps, ine = false): DataDefinitionClass {
     return new DataDefinitionClass("", this.pool).createTable(props, ine);
+  }
+
+  dropTable(table: string, constraint: dropConstraints, ie = false): DataDefinitionClass { 
+    return new DataDefinitionClass("", this.pool).dropTable(table, constraint, ie);
   }
 }

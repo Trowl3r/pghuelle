@@ -29,7 +29,7 @@ export function foreignKeyConstraint(fk: foreignKey): string {
     else s += `${fk.keys[i]}, `;
   }
 
-  s += `REFERENCES ${fk.table}(${fk.tableKey}) `;
+  s += ` REFERENCES ${fk.table}(${fk.tableKey})`;
   if(fk.onDelete) s += ` ON DELETE ${fk.onDelete}`;
   if(fk.onUpdate) s += ` ON UPDATE ${fk.onUpdate}`;
 

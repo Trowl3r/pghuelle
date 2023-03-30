@@ -1,6 +1,6 @@
-export type DataType = 'INT' | 'VARCHAR' | 'DATE';
-type onAction = 
-  'NO ACTION' | 'RESTRICT' | 'SET NULL' | 'SET DEFAULT' | 'CASCADE';
+export type dropConstraints = 'CASCADE' | 'RESTRICT';
+export type DataType = 'INT' | 'VARCHAR' | 'DATE' | 'TEXT';
+type onAction = 'NO ACTION' | 'RESTRICT' | 'SET NULL' | 'SET DEFAULT' | 'CASCADE';
 
 export interface foreignKey {
   keys: string[];

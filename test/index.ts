@@ -1,6 +1,6 @@
 // TODO: CREATE EXPORT STRUCTURE, THAT ALL AGGREGATE + TYPES CAN BE IMPORTED VIA NPM
 import PGHuelle from '../src';
-import { count } from '../src/functions/functions';
+import { count } from '../src/functions/aggregates';
 import { CreateTableProps } from '../src/interfaces/TableDefinition';
 
 const config = {
@@ -48,79 +48,9 @@ const db = new PGHuelle(config);
   .then((res) => console.log('Updated Values'))
   .catch((err) => console.error(err)); */
 
-// Create Table
-const manager: CreateTableProps = {
-  name: 'Manager',
-  columns: {
-    id: {
-      datatype: 'INT',
-      primaryKey: true,
-    },
-    name: {
-      datatype: 'VARCHAR',
-      size: 50,
-    },
-  },
-};
 
-const company: CreateTableProps = {
-  name: 'Company',
-  columns: {
-    id: {
-      datatype: 'INT',
-      primaryKey: true,
-    },
-    person: {
-      datatype: 'INT',
-      notNull: true,
-      foreignKey: {
-        keys: ['person'],
-        table: 'Person',
-        tableKey: 'id',
-        onDelete: 'CASCADE',
-      },
-    },
-    manager: {
-      datatype: 'INT',
-      notNull: true,
-      foreignKey: {
-        keys: ['manager'],
-        table: 'Manager',
-        tableKey: 'id',
-        onDelete: 'RESTRICT',
-      },
-    },
-    name: {
-      datatype: 'VARCHAR',
-      size: 50,
-    },
-  },
-};
 
-// console.log(db.createTable(company).getQuery());
-
-/* db.createTable(manager)
-  .execute()
-  .then((res) => console.log('Table Inserted'))
-  .catch((err) => console.log(err)); */
-
-/* db.insert('Manager').values('1', 'Manager 1')
-  .execute()
-  .then((res) => console.log("Inserted"))
-  .catch((err) => console.log(err));  */
-
-/* db.createTable(company)
-  .execute()
-  .then((res) => console.log('Table Inserted'))
-  .catch((err) => console.log(err)); */
-
-/* db.insert('Company').values('1', '2', '1','Test')
-  .execute()
-  .then((res) => console.log("Inserted"))
-  .catch((err) => console.log(err));  */
-
-console.log(
-
+/* console.log(
 db.select()
   .from('person')
   .join('company')
@@ -133,4 +63,4 @@ db.select()
   .on({ company: 'person' }, { person: 'id' })
   .execute()
   .then((res) => console.log(res.rows))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err)); */
